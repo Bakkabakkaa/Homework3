@@ -7,32 +7,60 @@ namespace Homework.Controllers;
 [Route("api/[controller]")]
 public class CalculatorController : Controller
 {
-    [HttpPost("post")]
-    public double Plus([FromBody] Operands operands)
+    [HttpPost("plus")]
+    public IActionResult Plus([FromBody] Operands operands)
     {
-        HttpContext.Response.StatusCode = 200;
-        return operands.X + operands.Y;
+        var formula = new Formula
+        {
+            X = operands.X,
+            Y = operands.Y,
+            Result = operands.X + operands.Y,
+            Operation = "plus"
+        };
+        
+        return Ok(formula);
     }
     
     [HttpPost("minus")]
-    public double Minus([FromBody] Operands operands)
+    public IActionResult Minus([FromBody] Operands operands)
     {
-        HttpContext.Response.StatusCode = 200;
-        return operands.X - operands.Y;
+        var formula = new Formula
+        {
+            X = operands.X,
+            Y = operands.Y,
+            Result = operands.X - operands.Y,
+            Operation = "minus"
+        };
+        
+        return Ok(formula);
     }
     
     [HttpPost("multiply")]
-    public double Multiply([FromBody] Operands operands)
+    public IActionResult Multiply([FromBody] Operands operands)
     {
-        HttpContext.Response.StatusCode = 300;
-        return operands.X * operands.Y;
+        var formula = new Formula
+        {
+            X = operands.X,
+            Y = operands.Y,
+            Result = operands.X * operands.Y,
+            Operation = "multiply"
+        };
+        
+        return Ok(formula);
     }
 
     [HttpPost("divide")]
-    public double Divide([FromBody] Operands operands)
+    public IActionResult Divide([FromBody] Operands operands)
     {
-        HttpContext.Response.StatusCode = 300;
-        return operands.X / operands.Y;
+        var formula = new Formula
+        {
+            X = operands.X,
+            Y = operands.Y,
+            Result = operands.X / operands.Y,
+            Operation = "divide"
+        };
+        
+        return Ok(formula);
     }
     
     [HttpPost("divideWithCheck")]
@@ -43,6 +71,14 @@ public class CalculatorController : Controller
             return BadRequest("Делить на ноль нельзя");
         }
 
-        return Ok(operands.X / operands.Y);
+        var formula = new Formula
+        {
+            X = operands.X,
+            Y = operands.Y,
+            Result = operands.X / operands.Y,
+            Operation = "divideWithCheck"
+        };
+        
+        return Ok(formula);
     }
 }
