@@ -7,32 +7,32 @@ namespace Homework.Controllers;
 [Route("api/[controller]")]
 public class CalculatorController : Controller
 {
-    [HttpGet("post")]
-    public double Plus([FromQuery] double x, [FromQuery] double y)
+    [HttpPost("post")]
+    public double Plus([FromBody] Operands operands)
     {
         HttpContext.Response.StatusCode = 200;
-        return x + y;
+        return operands.X + operands.Y;
     }
     
-    [HttpGet("minus")]
-    public double Minus([FromQuery] double x, [FromQuery] double y)
+    [HttpPost("minus")]
+    public double Minus([FromBody] Operands operands)
     {
         HttpContext.Response.StatusCode = 200;
-        return x - y;
+        return operands.X - operands.Y;
     }
     
-    [HttpGet("multiply/{x}/{y}")]
-    public double Multiply([FromRoute] double x, [FromRoute] double y)
+    [HttpPost("multiply")]
+    public double Multiply([FromBody] Operands operands)
     {
         HttpContext.Response.StatusCode = 300;
-        return x * y;
+        return operands.X * operands.Y;
     }
 
-    [HttpGet("divide/{x}/{y}")]
-    public double Divide([FromRoute] double x, [FromRoute] double y)
+    [HttpPost("divide")]
+    public double Divide([FromBody] Operands operands)
     {
         HttpContext.Response.StatusCode = 300;
-        return x / y;
+        return operands.X / operands.Y;
     }
     
     [HttpPost("divideWithCheck")]
