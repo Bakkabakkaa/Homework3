@@ -34,4 +34,15 @@ public class CalculatorController : Controller
         HttpContext.Response.StatusCode = 300;
         return x / y;
     }
+    
+    [HttpPost("divideWithCheck")]
+    public IActionResult DividedWithCheck([FromBody] Operands operands)
+    {
+        if (operands.Y == 0)
+        {
+            return BadRequest("Делить на ноль нельзя");
+        }
+
+        return Ok(operands.X / operands.Y);
+    }
 }
